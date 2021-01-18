@@ -10,14 +10,14 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 app.use(express.urlencoded({ extended: true }));
-var allowCrossDomain=["https://18127003.github.io/react_app","http://localhost:3000"]
+var allowCrossDomain=["https://18127003.github.io","http://localhost:3000"]
 app.use(cors({
   origin: function(origin, callback){
     if(!origin){
       return callback(null,true);
     }
     if(allowCrossDomain.indexOf(origin)=== -1){
-      var msg = 'not allow';
+      var msg = `not allow ${origin}`;
       return callback(new Error(msg),false);
     }
     return callback(null,true);
