@@ -39,4 +39,5 @@ router.get("/getAll", async(req, res)=>{
 router.get("/test", (req, res)=>{
     res.json({name:"hi"})
 })
+
 module.exports = router;
