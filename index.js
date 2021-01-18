@@ -38,8 +38,6 @@ app.use(
 // }
 // app.use(allowCrossDomain);
 app.use("/api", require("./route/api.js"));
-app.get("/",(req,res)=>{
-  res.render("index.html");
-})
+
 const PORT = process.env.PORT || 5500;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
