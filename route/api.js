@@ -6,6 +6,9 @@ var multipartMiddleware = multipart();
 const Todo = require("../model/Todo");
 
 router.post("/saveTodo", multipartMiddleware, async(req,res)=>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     let todo = new Todo({
         _id: req.body.id,
         title: req.body.title,
