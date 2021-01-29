@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 //     return callback(null,true);
 //   }
 // }))
-app.use(cors)
+app.use(cors())
 app.use(
   session({
     secret: "secret",
