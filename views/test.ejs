@@ -55,6 +55,7 @@
                 var ansChemical = [];
                 for(let i=0;i<20;++i){
                     if(document.getElementById(`${index}formula${i}`)!=null){
+                        
                         element = document.getElementById(`${index}formula${i}`)
                         element.disabled = true
                         ansFormula.push(JSON.stringify({
@@ -91,13 +92,13 @@
                     wrong = JSON.parse(wrongString)
                     element = document.getElementById(`${index}formula${wrong.index}`);
                     element.style.color = 'crimson';
-                    element.value = `${element.value}=>${wrong.truth}`;
+                    element.value = `${element.value} \n=> ${wrong.truth}`;
                 });
                 JSON.parse(content.wrongChemical).forEach(wrongString => {
                     wrong = JSON.parse(wrongString)
                     element = document.getElementById(`${index}chemical${wrong.index}`);
                     element.style.color = 'crimson';
-                    element.value = `${element.value}=>${wrong.truth}`;
+                    element.value = `${element.value} \n=> ${wrong.truth}`;
                 });
             }
         })

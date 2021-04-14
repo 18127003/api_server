@@ -94,7 +94,7 @@ router.post("/check",multipartMiddleware,(req, res)=>{
     wrongChemical = [];
     ansFormula.forEach(formula => {
         answer = JSON.parse(formula)
-        if(answer.answer==formulaList[answer.index]){
+        if(answer.answer==formulaList[answer.index].toLocaleLowerCase){
             right++;
         } else {
             wrongFormula.push(JSON.stringify({
@@ -105,7 +105,7 @@ router.post("/check",multipartMiddleware,(req, res)=>{
     });
     ansChemical.forEach(chemical=>{
         answer = JSON.parse(chemical)
-        if(answer.answer==chemicalList[answer.index]){
+        if(answer.answer==chemicalList[answer.index].toLocaleLowerCase()){
             right++;
         } else {
             wrongChemical.push(JSON.stringify({
