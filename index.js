@@ -19,6 +19,7 @@ app.set('layout','layout')
 app.set('view engine', 'ejs');
 app.use("/script", express.static(path.join(__dirname,"/script")));
 app.use("/stylesheet", express.static(path.join(__dirname,"/stylesheet")));
+app.use("/audio", express.static(path.join(__dirname,"/audio")));
 // var allowCrossDomain=["https://18127003.github.io","http://localhost:3000"]
 // app.use(cors({
 //   origin: function(origin, callback){
