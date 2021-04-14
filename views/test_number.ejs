@@ -9,10 +9,8 @@
 </div>
 <form>
     <div class="row s12">
-        <div class="col s2">
-
-        </div>
-        <div class="col s8">
+        
+        <div class="col s12">
             <div class="card">
                 <table class="highlight centered light-blue lighten-5">
                     <thead class="teal">
@@ -59,7 +57,7 @@
             </div>
             <input id="test_index" value="<%= index %>" style="display: none;"/>
             <div class="row s12 center" style="margin-top: 24px;">
-                <button class="btn waves-effect waves-light" type="submit" name="action" id="submitBtn">Submit
+                <button class="btn waves-effect waves-light" type="submit" name="action" id="submitBtn<%= index %>">Submit
                     <i class="material-icons right">science</i>
                 </button>
             </div>
@@ -67,56 +65,3 @@
     </div>
     
 </form>
-<script>
-    document.getElementById('submitBtn').addEventListener("click",async (e)=>{
-        e.preventDefault();
-        index = document.getElementById('test_index').value;
-        var ansFormula = [];
-        var ansChemical = [];
-        for(let i=0;i<20;++i){
-            if(document.getElementById(`${index}formula${i}`)!=null){
-                element = document.getElementById(`${index}formula${i}`)
-                element.disabled = true
-                ansFormula.push(JSON.stringify({
-                    answer: element.value,
-                    index:i
-                }))
-            }
-            if(document.getElementById(`${index}chemical${i}`)!=null){
-                element = document.getElementById(`${index}chemical${i}`)
-                element.disabled = true
-                ansChemical.push(JSON.stringify({
-                    answer: element.value,
-                    index:i
-                }))
-            }
-        }
-        const comres = await fetch(`/chemicalTest/check?index=${index}`,{
-            method:"POST",
-            headers:{
-                "Accept":"application/x-www-form-urlencoded",
-                "Content-Type":"application/x-www-form-urlencoded"
-                },
-            body: new URLSearchParams({
-                ansFormula:JSON.stringify(ansFormula), 
-                ansChemical: JSON.stringify(ansChemical),
-                })
-        })
-        const content = await comres.json();
-
-        document.getElementById('score').innerHTML=`Score: ${content.score}`;
-        
-        JSON.parse(content.wrongFormula).forEach(wrongString => {
-            wrong = JSON.parse(wrongString)
-            element = document.getElementById(`${index}formula${wrong.index}`);
-            element.style.color = 'crimson';
-            element.value = `${element.value}=>${wrong.truth}`;
-        });
-        JSON.parse(content.wrongChemical).forEach(wrongString => {
-            wrong = JSON.parse(wrongString)
-            element = document.getElementById(`${index}chemical${wrong.index}`);
-            element.style.color = 'crimson';
-            element.value = `${element.value}=>${wrong.truth}`;
-        });
-    })
-</script>

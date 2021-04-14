@@ -85,8 +85,10 @@ router.get("/",(req, res)=> {
 
 router.post("/check",multipartMiddleware,(req, res)=>{
     index = req.query.index;
+
     ansFormula = JSON.parse(req.body.ansFormula);
     ansChemical = JSON.parse(req.body.ansChemical);
+
     var right = 0;
     wrongFormula = [];
     wrongChemical = [];

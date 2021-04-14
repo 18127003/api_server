@@ -40,6 +40,160 @@
     
     <script>
         M.Tabs.init(document.getElementById('testTab'));
+        var tab = M.Tabs.getInstance(document.getElementById('testTab'));
+        
+        document.getElementById(`submitBtn0`).addEventListener("click",async (e)=>{
+            e.preventDefault();
+            var ansFormula = [];
+            var ansChemical = [];
+            for(let i=0;i<20;++i){
+                if(document.getElementById(`0formula${i}`)!=null){
+                    element = document.getElementById(`0formula${i}`)
+                    element.disabled = true
+                    ansFormula.push(JSON.stringify({
+                        answer: element.value,
+                        index:i
+                    }))
+                }
+                if(document.getElementById(`0chemical${i}`)!=null){
+                    element = document.getElementById(`0chemical${i}`)
+                    element.disabled = true
+                    ansChemical.push(JSON.stringify({
+                        answer: element.value,
+                        index:i
+                    }))
+                }
+            }
+            const comres = await fetch(`/chemicalTest/check?index=0`,{
+                method:"POST",
+                headers:{
+                    "Accept":"application/x-www-form-urlencoded",
+                    "Content-Type":"application/x-www-form-urlencoded"
+                    },
+                body: new URLSearchParams({
+                    ansFormula:JSON.stringify(ansFormula), 
+                    ansChemical: JSON.stringify(ansChemical),
+                    })
+            })
+            const content = await comres.json();
+
+            document.getElementById('score').innerHTML=`Score: ${content.score}`;
+            console.log(content);
+            JSON.parse(content.wrongFormula).forEach(wrongString => {
+                wrong = JSON.parse(wrongString)
+                element = document.getElementById(`0formula${wrong.index}`);
+                element.style.color = 'crimson';
+                element.value = `${element.value}=>${wrong.truth}`;
+            });
+            JSON.parse(content.wrongChemical).forEach(wrongString => {
+                wrong = JSON.parse(wrongString)
+                element = document.getElementById(`0chemical${wrong.index}`);
+                element.style.color = 'crimson';
+                element.value = `${element.value}=>${wrong.truth}`;
+            });
+        })
+        
+        document.getElementById(`submitBtn1`).addEventListener("click",async (e)=>{
+            e.preventDefault();
+            var ansFormula = [];
+            var ansChemical = [];
+            for(let i=0;i<20;++i){
+                if(document.getElementById(`1formula${i}`)!=null){
+                    element = document.getElementById(`1formula${i}`)
+                    element.disabled = true
+                    ansFormula.push(JSON.stringify({
+                        answer: element.value,
+                        index:i
+                    }))
+                }
+                if(document.getElementById(`1chemical${i}`)!=null){
+                    element = document.getElementById(`1chemical${i}`)
+                    element.disabled = true
+                    ansChemical.push(JSON.stringify({
+                        answer: element.value,
+                        index:i
+                    }))
+                }
+            }
+            const comres = await fetch(`/chemicalTest/check?index=1`,{
+                method:"POST",
+                headers:{
+                    "Accept":"application/x-www-form-urlencoded",
+                    "Content-Type":"application/x-www-form-urlencoded"
+                    },
+                body: new URLSearchParams({
+                    ansFormula:JSON.stringify(ansFormula), 
+                    ansChemical: JSON.stringify(ansChemical),
+                    })
+            })
+            const content = await comres.json();
+
+            document.getElementById('score').innerHTML=`Score: ${content.score}`;
+            console.log(content);
+            JSON.parse(content.wrongFormula).forEach(wrongString => {
+                wrong = JSON.parse(wrongString)
+                element = document.getElementById(`1formula${wrong.index}`);
+                element.style.color = 'crimson';
+                element.value = `${element.value}=>${wrong.truth}`;
+            });
+            JSON.parse(content.wrongChemical).forEach(wrongString => {
+                wrong = JSON.parse(wrongString)
+                element = document.getElementById(`1chemical${wrong.index}`);
+                element.style.color = 'crimson';
+                element.value = `${element.value}=>${wrong.truth}`;
+            });
+        })
+
+        document.getElementById(`submitBtn2`).addEventListener("click",async (e)=>{
+            e.preventDefault();
+            var ansFormula = [];
+            var ansChemical = [];
+            for(let i=0;i<20;++i){
+                if(document.getElementById(`2formula${i}`)!=null){
+                    element = document.getElementById(`2formula${i}`)
+                    element.disabled = true
+                    ansFormula.push(JSON.stringify({
+                        answer: element.value,
+                        index:i
+                    }))
+                }
+                if(document.getElementById(`2chemical${i}`)!=null){
+                    element = document.getElementById(`2chemical${i}`)
+                    element.disabled = true
+                    ansChemical.push(JSON.stringify({
+                        answer: element.value,
+                        index:i
+                    }))
+                }
+            }
+            const comres = await fetch(`/chemicalTest/check?index=2`,{
+                method:"POST",
+                headers:{
+                    "Accept":"application/x-www-form-urlencoded",
+                    "Content-Type":"application/x-www-form-urlencoded"
+                    },
+                body: new URLSearchParams({
+                    ansFormula:JSON.stringify(ansFormula), 
+                    ansChemical: JSON.stringify(ansChemical),
+                    })
+            })
+            const content = await comres.json();
+
+            document.getElementById('score').innerHTML=`Score: ${content.score}`;
+            console.log(content);
+            JSON.parse(content.wrongFormula).forEach(wrongString => {
+                wrong = JSON.parse(wrongString)
+                element = document.getElementById(`2formula${wrong.index}`);
+                element.style.color = 'crimson';
+                element.value = `${element.value}=>${wrong.truth}`;
+            });
+            JSON.parse(content.wrongChemical).forEach(wrongString => {
+                wrong = JSON.parse(wrongString)
+                element = document.getElementById(`2chemical${wrong.index}`);
+                element.style.color = 'crimson';
+                element.value = `${element.value}=>${wrong.truth}`;
+            });
+        })
         
     </script>
 </body>
