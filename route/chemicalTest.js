@@ -1,12 +1,10 @@
 const express = require("express");
 const Chemical = require("../model/Chemical");
 const router = express.Router();
-const path = require('path')
+const path = require('path');
+var multipart = require("connect-multiparty");
+var multipartMiddleware = multipart();
 
-router.get("/",(req, res)=> {
-    var chems = prepareData();
-    res.render("test",{test: chems})
-});
 var chemicalList = [
     'Sodium hydrogen sulfate',
     'Silicon dioxide',
@@ -51,6 +49,10 @@ var formulaList = [
     'NH3',
     'LiH',
 ]
+
+
+
+
 var prepareData = function(){
     var chems = [];
     for(let i =0;i<3;++i){
@@ -72,5 +74,50 @@ var prepareData = function(){
     }
     return chems;
 }
+
+router.get("/",(req, res)=> {
+    var test1 = prepareData();
+    var test2 = prepareData();
+    var test3 = prepareData();
+    tests = [test1, test2, test3]
+    res.render("test",{tests: tests})
+});
+
+router.post("/check",multipartMiddleware,(req, res)=>{
+    index = req.query.index;
+    ansFormula = JSON.parse(req.body.ansFormula);
+    ansChemical = JSON.parse(req.body.ansChemical);
+    var right = 0;
+    wrongFormula = [];
+    wrongChemical = [];
+    ansFormula.forEach(formula => {
+        answer = JSON.parse(formula)
+        if(answer.answer==formulaList[answer.index]){
+            right++;
+        } else {
+            wrongFormula.push(JSON.stringify({
+                index: answer.index,
+                truth: formulaList[answer.index]
+            }))
+        }
+    });
+    ansChemical.forEach(chemical=>{
+        answer = JSON.parse(chemical)
+        if(answer.answer==chemicalList[answer.index]){
+            right++;
+        } else {
+            wrongChemical.push(JSON.stringify({
+                index: answer.index,
+                truth: chemicalList[answer.index]
+            }))
+        }
+    })
+    res.json({
+        score: `${right}/${ansFormula.length+ansChemical.length}`,
+        wrongFormula: JSON.stringify(wrongFormula),
+        wrongChemical: JSON.stringify(wrongChemical),
+    });
+})
+
 
 module.exports = router;
