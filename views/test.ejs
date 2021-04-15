@@ -93,12 +93,14 @@
                     element = document.getElementById(`${index}formula${wrong.index}`);
                     element.style.color = 'crimson';
                     element.value = `${element.value} \n=> ${wrong.truth}`;
+                    M.textareaAutoResize(element);
                 });
                 JSON.parse(content.wrongChemical).forEach(wrongString => {
                     wrong = JSON.parse(wrongString)
                     element = document.getElementById(`${index}chemical${wrong.index}`);
                     element.style.color = 'crimson';
                     element.value = `${element.value} \n=> ${wrong.truth}`;
+                    M.textareaAutoResize(element);
                 });
             }
         })

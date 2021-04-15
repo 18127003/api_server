@@ -29,7 +29,7 @@
                             <tr>
                                 <td style="width: 25%;">
                                     <% if(test[i].formula.length==0){ %>
-                                        <textarea name="" id="<%= index %>formula<%= i %>"></textarea>
+                                        <textarea class="materialize-textarea" id="<%= index %>formula<%= i %>"></textarea>
                                     <% } else { %>
                                         <%= test[i].formula %>
                                     <% } %>
@@ -39,7 +39,7 @@
                                 </td>
                                 <td>
                                     <% if(test[i].chemical.length==0){ %>
-                                        <textarea name="" id="<%= index %>chemical<%= i %>" ></textarea>
+                                        <textarea  class="materialize-textarea" id="<%= index %>chemical<%= i %>" ></textarea>
                                     <% } else { %>
                                         <%= test[i].chemical %>
                                     <% } %>
