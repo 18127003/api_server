@@ -15,7 +15,7 @@ var chemicalList = [
     'Hydrogen sulfide',
     'Silver bromide',
     'Phosphorus',
-    'Carbonic',
+    'Carbon dioxide',
     'Ammonium hydrogen phosphate',
     'Hydrobromic acid',
     'Barium chloride',
@@ -25,7 +25,47 @@ var chemicalList = [
     'Dichlorine heptoxide',
     'Potassium dichromate',
     'Ammonia',
-    'Lithium hydride'
+    'Lithium hydride',
+    'sulfur hexafluoride',
+    'ammonium dihydrogen phosphate',
+    'sodium hypobromite',
+    'diamminecsilver(I) hydroxide',
+    'dinitrogen oxide',
+    'manganese (II) sulfate',
+    'lithium nitride',
+    'potassium permanganate',
+    'helium',
+    'carbon monoxide',
+    'iron (II,III) oxide',
+    'copper (I) sulfide',
+    'aluminium chloride',
+    'calcium carbide',
+    'oxygen',
+    'calcium silicate',
+    'phosphorous acid',
+    'sodium chromate',
+    'methane',
+    'hydrogen peroxide',
+    'sulfurous acid',
+    'bromine',
+    'silver chloride',
+    'sodium dicyanoargenate(I)',
+    'sulfur dioxide',
+    'barium hydrogen carbonate',
+    'aluminium carbide',
+    'diboron trioxide',
+    'copper',
+    'iron (III) sulfate',
+    'magnesium oxide',
+    'ammonium nitrate',
+    'chloric acid',
+    'mercury (II) sulfide',
+    'sodium tetrahydroxozincate(II)',
+    'sodium hydride',
+    'hydrogen chloride',
+    'hydroiodic acid',
+    'ozone',
+    'hydrogen peroxide'
 ]
 var formulaList = [ 
     'NaHSO4',
@@ -48,6 +88,46 @@ var formulaList = [
     'K2Cr2O7',
     'NH3',
     'LiH',
+    'SF6',
+    'NH4H2PO4',
+    'NaBrO',
+    '[Ag(NH3)2](OH)',
+    'N2O',
+    'MnSO4',
+    'Li3N',
+    'KMnO4',
+    'He',
+    'CO',
+    'Fe3O4',
+    'Cu2S',
+    'AlCl3',
+    'CaC2',
+    'O2',
+    'CaSiO3',
+    'H3PO3',
+    'Na2CrO4',
+    'CH4',
+    'H2O2',
+    'H2SO3',
+    'Br2',
+    'AgCl',
+    'Na2[Ag(CN)2]',
+    'SO2',
+    'Ba(HCO3)2',
+    'Al4C3',
+    'B2O3',
+    'Cu',
+    'Fe2(SO4)3',
+    'MgO',
+    'NH4NO3',
+    'HClO3',
+    'HgS',
+    'Na2[Zn(OH)4]',
+    'NaH',
+    'HCl (khí)',
+    'HI (dd)',
+    'O3',
+    'H2O2'
 ]
 
 
@@ -60,15 +140,15 @@ var prepareData = function(){
             let formula = '', chemical='';
             switch(Math.floor(Math.random()*3)){
                 case 1:
-                    chemical = chemicalList[j];
+                    chemical = chemicalList[i*20+j];
                     break;
                 case 2:
-                    formula = formulaList[j];
+                    formula = formulaList[i*20+j];
                     break;
                 default:
                     break;
             }
-            var chem = new Chemical( formula, chemical, `/audio/${1},${j+1}.mp3`);
+            var chem = new Chemical( formula, chemical, `/audio/${i+1},${j+1}.mp3`);
             chems.push(chem);
         }
     }
@@ -76,9 +156,9 @@ var prepareData = function(){
 }
 
 router.get("/",(req, res)=> {
-    var test1 = prepareData();
-    var test2 = prepareData();
-    var test3 = prepareData();
+    var test1 = prepareData().copyWithin(20,0,19);
+    var test2 = prepareData().copyWithin(20,20,39);
+    var test3 = prepareData().copyWithin(20,40,59);
     tests = [test1, test2, test3]
     res.render("test",{tests: tests})
 });
@@ -94,23 +174,23 @@ router.post("/check",multipartMiddleware,(req, res)=>{
     wrongChemical = [];
     ansFormula.forEach(formula => {
         answer = JSON.parse(formula)
-        if(answer.answer.toLowerCase()==formulaList[answer.index].toLowerCase()){
+        if(answer.answer.toLowerCase()==formulaList[index*20+answer.index].toLowerCase()){
             right++;
         } else {
             wrongFormula.push(JSON.stringify({
                 index: answer.index,
-                truth: formulaList[answer.index]
+                truth: formulaList[index*20+answer.index]
             }))
         }
     });
     ansChemical.forEach(chemical=>{
         answer = JSON.parse(chemical)
-        if(answer.answer.toLowerCase()==chemicalList[answer.index].toLowerCase()){
+        if(answer.answer.toLowerCase()==chemicalList[index*20+answer.index].toLowerCase()){
             right++;
         } else {
             wrongChemical.push(JSON.stringify({
                 index: answer.index,
-                truth: chemicalList[answer.index]
+                truth: chemicalList[index*20+answer.index]
             }))
         }
     })
