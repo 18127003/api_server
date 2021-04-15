@@ -68,7 +68,7 @@ var prepareData = function(){
                 default:
                     break;
             }
-            var chem = new Chemical( formula, chemical, `/audio/1,2.mp3`);
+            var chem = new Chemical( formula, chemical, `/audio/${1},${j+1}.mp3`);
             chems.push(chem);
         }
     }
@@ -94,7 +94,7 @@ router.post("/check",multipartMiddleware,(req, res)=>{
     wrongChemical = [];
     ansFormula.forEach(formula => {
         answer = JSON.parse(formula)
-        if(answer.answer==formulaList[answer.index].toLocaleLowerCase){
+        if(answer.answer.toLowerCase()==formulaList[answer.index].toLowerCase()){
             right++;
         } else {
             wrongFormula.push(JSON.stringify({
@@ -105,7 +105,7 @@ router.post("/check",multipartMiddleware,(req, res)=>{
     });
     ansChemical.forEach(chemical=>{
         answer = JSON.parse(chemical)
-        if(answer.answer==chemicalList[answer.index].toLocaleLowerCase()){
+        if(answer.answer.toLowerCase()==chemicalList[answer.index].toLowerCase()){
             right++;
         } else {
             wrongChemical.push(JSON.stringify({
