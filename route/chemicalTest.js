@@ -133,32 +133,31 @@ var formulaList = [
 
 
 
-var prepareData = function(){
+var prepareData = function(test_number){
     var chems = [];
-    for(let i =0;i<3;++i){
-        for(let j=0;j<20;++j){
-            let formula = '', chemical='';
-            switch(Math.floor(Math.random()*3)){
-                case 1:
-                    chemical = chemicalList[i*20+j];
-                    break;
-                case 2:
-                    formula = formulaList[i*20+j];
-                    break;
-                default:
-                    break;
-            }
-            var chem = new Chemical( formula, chemical, `/audio/${i+1},${j+1}.mp3`);
-            chems.push(chem);
+
+    for(let j=0;j<20;++j){
+        let formula = '', chemical='';
+        switch(Math.floor(Math.random()*3)){
+            case 1:
+                chemical = chemicalList[test_number*20+j];
+                break;
+            case 2:
+                formula = formulaList[test_number*20+j];
+                break;
+            default:
+                break;
         }
+        var chem = new Chemical( formula, chemical, `/audio/${test_number+1},${j+1}.mp3`);
+        chems.push(chem);
     }
     return chems;
 }
 
 router.get("/",(req, res)=> {
-    var test1 = prepareData().copyWithin(20,0,19);
-    var test2 = prepareData().copyWithin(20,20,39);
-    var test3 = prepareData().copyWithin(20,40,59);
+    var test1 = prepareData(0)
+    var test2 = prepareData(1)
+    var test3 = prepareData(2)
     tests = [test1, test2, test3]
     res.render("test",{tests: tests})
 });
