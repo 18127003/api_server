@@ -9,7 +9,7 @@ var chemicalList = [
     'Sodium hydrogen sulfate',
     'Silicon dioxide',
     'Octasulfur',
-    'Tetraamminecuprate(II) hydroxide',
+    'Tetraamminecopper(II) hydroxide',
     'Nitrogen oxide',
     'Potassium iodide',
     'Hydrogen sulfide',
