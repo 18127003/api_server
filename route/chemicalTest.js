@@ -6,7 +6,7 @@ var multipart = require("connect-multiparty");
 var multipartMiddleware = multipart();
 
 var chemicalList = [
-    'Sodium hydrogen sulfate',
+    'Sodium hydrogensulfate',
     'Silicon dioxide',
     'Octasulfur',
     'Tetraamminecopper(II) hydroxide',
@@ -16,7 +16,7 @@ var chemicalList = [
     'Silver bromide',
     'Phosphorus',
     'Carbon dioxide',
-    'Ammonium hydrogen phosphate',
+    'Ammonium hydrogenphosphate',
     'Hydrobromic acid',
     'Barium chloride',
     'Iron (III) oxide',
@@ -27,7 +27,7 @@ var chemicalList = [
     'Ammonia',
     'Lithium hydride',
     'sulfur hexafluoride',
-    'ammonium dihydrogen phosphate',
+    'ammonium dihydrogenphosphate',
     'sodium hypobromite',
     'diamminecsilver(I) hydroxide',
     'dinitrogen oxide',
@@ -51,7 +51,7 @@ var chemicalList = [
     'silver chloride',
     'sodium dicyanoargenate(I)',
     'sulfur dioxide',
-    'barium hydrogen carbonate',
+    'barium hydrogencarbonate',
     'aluminium carbide',
     'diboron trioxide',
     'copper',
