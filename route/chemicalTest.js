@@ -30,7 +30,7 @@ var chemicalList = [
     'ammonium dihydrogenphosphate',
     'sodium hypobromite',
     'diamminecsilver(I) hydroxide',
-    'dinitrogen oxide',
+    'dinitrogen monoxide',
     'manganese (II) sulfate',
     'lithium nitride',
     'potassium permanganate',
