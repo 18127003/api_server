@@ -36,8 +36,10 @@ router.get("/getAll", async(req, res)=>{
     let todos = await Todo.find({})
     res.json({todos:JSON.stringify(todos)})
 })
-router.get("/test", (req, res)=>{
-    res.json({name:"hi"})
+
+router.get("/test", async(req, res)=>{
+    let todos = await Todo.find({})
+    res.json(todos)
 })
 
 module.exports = router;
